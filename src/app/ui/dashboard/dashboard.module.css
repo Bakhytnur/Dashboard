@@ -1,0 +1,14 @@
+.container {
+    display: flex;
+}
+
+.sidebar {
+    flex: 1;
+    background-color: var(--bgSoft);
+    padding: 20px;
+}
+
+.navbar {
+    flex: 4;
+    padding: 20px;
+}
