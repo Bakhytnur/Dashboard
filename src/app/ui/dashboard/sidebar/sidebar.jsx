@@ -1,4 +1,5 @@
 import React from 'react'
+import Image from "next/image";
 import styles from './sidebar.module.css'
 import {
     MdDashboard,
@@ -12,6 +13,7 @@ import {
     MdHelpCenter,
     MdLogout,
   } from "react-icons/md";
+import MenuLink from './menuLink/menuLink'
 
 const menuItems = [
   {
@@ -78,7 +80,27 @@ const menuItems = [
 
 const Sidebar = () => {
   return (
-    <div className={styles.container}>Sidebar</div>
+    <div className={styles.container}>
+      <div className={styles.user}>
+        <Image className={styles.userImage} src="/noavatar.png" alt="" width="50" height="50" />
+        <div className={styles.userDetail}>
+          <span className={styles.username}>John Doe</span>
+          <span className={styles.userTitle}>Admin</span>
+        </div>
+      </div>
+      <ul className={styles.list}>
+        {menuItems.map(category => (
+          <li key={category.title}>
+            <span className={styles.category}>
+              {category.title}
+            </span>
+            {category.list.map(item => (
+              <MenuLink item={item} key={item.title} />
+            ))}
+          </li>
+        ))}
+      </ul>
+    </div>
   )
 }
 
