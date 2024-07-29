@@ -5,14 +5,15 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Pagination from '@/app/ui/dashboard/pagination/pagination'
 import { fetchProducts } from '@/app/lib/data'
+import { deleteProduct } from '@/app/lib/actions'
 
 const ProductsPage = async ({searchParams}) => {
   const q = searchParams?.q || "";
   const page = searchParams?.page || 1;
   const {count, products} = await fetchProducts(q, page);
 
-  console.log('searchParams', searchParams);
-  console.log('q', q);
+  //console.log('searchParams', searchParams);
+  //console.log('q', q);
 
   return (
     <div className={styles.container}>
@@ -44,14 +45,17 @@ const ProductsPage = async ({searchParams}) => {
             </td>
             <td>{product.desc}</td>
             <td>{product.price}</td>
-            <td>{product.createdAt?.toString().splice(4,16)}</td>
+            <td>{product.createdAt?.toString().slice(4,16)}</td>
             <td>{product.stock}</td>
             <td>
               <div className={styles.buttons}>
                 <Link href={`/dashboard/products/${product.id}`}>
                   <button className={`${styles.button} ${styles.view}`}>View</button>
                 </Link>
+                <form action={deleteProduct}>
+                  <input type="hidden" name="id" value={product.id} />
                   <button className={`${styles.button} ${styles.delete}`}>Delete</button>
+                </form>
               </div>
             </td>
           </tr>
