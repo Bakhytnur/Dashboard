@@ -6,11 +6,11 @@
     padding: 10px;
     border-radius: 10px;
     width: max-content;
-  }
+}
   
-  .input {
+.input {
     background-color: transparent;
     border: none;
     color: var(--text);
     outline: none;
-  }
+}
